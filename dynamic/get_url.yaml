@@ -12,7 +12,7 @@
       package:
         name: unzip
         state: present
-    - name: Unzip
+    - name: unzip
       urarchive:
         src: /tmp/wordpress-5.2.3.zip
         dest: /tmp
