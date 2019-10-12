@@ -11,7 +11,7 @@
       with_items:
         - telnet
         - lftp
-        - firawalld
+        - firewalld
         - curl
         - gzip
         - httpd
