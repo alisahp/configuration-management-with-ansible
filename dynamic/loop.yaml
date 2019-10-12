@@ -1,0 +1,19 @@
+---
+- name: Playbook for tasks
+  hosts: all 
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: Install multiple packages
+      package: 
+        name: "{{item}}"
+        state: present
+      with_items:
+        - telnet
+        - lftp
+        - firawalld
+        - curl
+        - gzip
+        - httpd
+        - sshd
+        
