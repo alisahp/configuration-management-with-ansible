@@ -11,7 +11,8 @@
     - name: Start apache
       systemd: 
         name: httpd
-        state: restarted  
+        state: restarted 
+        enabled: yes  
     - name: Install firewalld
       yum:
         name: firewalld
@@ -19,5 +20,23 @@
     - name: Install telnet
       yum: 
         name: telnet
-        state: latest 
+        state: latest
+    - name: Add user bob
+      user:
+        name: bob
+        state: present 
+        comment: "Bob Abonaser"
+        group: wheel
+        uid: 2001
+        create_home: yes
+        expires: 14224033
+        generate_ssh_key: yes
+    - name: Install lftp
+      package:
+        name: lftp
+        state: present
+        
+
+      
+      
         
