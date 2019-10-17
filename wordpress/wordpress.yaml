@@ -44,8 +44,8 @@
 
     - name: create MySQL user 
       mysql_user:
-        user: '{{alisa}}'
-        password: '{{alisa}}'
+        user: '{{alisa_db_user}}'
+        password: '{{alisa_db_password}}'
         priv: '*.*:ALL,GRANT'
         state: present
 
