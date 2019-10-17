@@ -1,0 +1,98 @@
+---
+- name: install wordpress website
+  hosts: all
+  vars:
+    alisa_db_user: alisa
+    alisa_db_password: alisa
+    alisa_wordpress_db: alisa
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: install multiple packages
+      package:
+        name: "{{item}}"
+        state: latest
+      with_items:
+        - httpd
+        - mariadb
+        - mariadb-server
+        - php
+        - php-mysql
+        - php-gd
+        - MySQL-python
+        - git-all
+        - python-devel
+        - unzip
+        - rsync
+    
+    - name: start apache
+      service:
+        name: "{{item}}"
+        state: restarted
+      with_items:
+        - httpd
+
+
+
+    - name: start and enable MariaDB
+      service: 
+        name: "{{item}}"
+        state: started
+        enabled: yes 
+      with_items:
+        - mariadb
+
+    - name: create MySQL user 
+      mysql_user:
+        user: '{{alisa}}'
+        password: '{{alisa}}'
+        priv: '*.*:ALL,GRANT'
+        state: present
+
+    - name: create db for Wordpress
+      mysql_db:
+        name: '{{alisa_wordpress_db}}'
+        state: present
+
+    - name: Reload Privileges
+      command: 'mysql -ne "{{item}}"'
+      with_items:
+        - FLUSH PRIVILEGES
+      changed_when: false
+
+
+    - name: download wordpress
+      get_url:
+        url: https://wordpress.org/wordpress-5.1.1.zip
+        dest: /tmp/wordpress.zip
+
+    - name: unzip wordpress
+      unarchive:
+        src: /tmp/wordpress.zip
+        dest: /tmp/
+        copy: no
+
+    - name: copy files within /tmp/wordpress to /var/ww/html
+      copy:
+        src: /tmp/wordpress/
+        dest: /var/www/html
+        owner: apache
+        group: apache
+        remote_src: yes
+
+    - name: copy copysrc.yaml file as wp-config.php
+      template:
+        src: ./wp-config.j2
+        dest: /var/www/html/wp-config.php
+
+      notify: 
+        - restart my apache
+    
+  handlers:
+    - name: restart my apache
+      service: name=httpd state=restarted
+
+    
+
+    
+
