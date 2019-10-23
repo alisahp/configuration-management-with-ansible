@@ -20,7 +20,7 @@
       shell: "shutdown -r now"
 
     - name: Wait 600 seconds for target connection to become reachable/usable
-      wait_for connection: 
+      wait_for_connection: 
         delay: 60
         timeout: 300
 
@@ -29,7 +29,7 @@
       shell: uname -r
       register: message
 
-      
+
     - name: Debug
       debug:
         msg: "{{message}}"
