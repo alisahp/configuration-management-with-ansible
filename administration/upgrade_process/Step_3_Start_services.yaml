@@ -4,55 +4,55 @@
   become: yes
   become_method: sudo
   tasks:
-    - name: Stop service1
+    - name: start service1
       when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "7")
       systemd:
         name: "{{service1}}"
-        state: stopped
+        state: started
       ignore_errors: true
-    - name: Stop service2
+    - name: start service2
       when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "7")
       systemd:
         name: "{{service2}}"
-        state: stopped
+        state: started
       ignore_errors: true 
-    - name: Stop service3
+    - name: start service3
       when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "7")
       systemd:
         name: "{{service3}}"
-        state: stopped
+        state: started
       ignore_errors: true
-    - name: Stop service4
+    - name: start service4
       when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "7")
       systemd:
         name: "{{service4}}"
-        state: stopped
+        state: started
       ignore_errors: true
 
 
 
 
-    - name: Stop service1
+    - name: start service1
       when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "6")
       systemd:
         name: "{{service1}}"
-        state: stopped
+        state: started
       ignore_errors: true
-    - name: Stop service2
+    - name: start service2
       when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "6")
       systemd:
         name: "{{service2}}"
-        state: stopped
+        state: started
       ignore_errors: true 
-    - name: Stop service3
+    - name: start service3
       when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "6")
       systemd:
         name: "{{service3}}"
-        state: stopped
+        state: started
       ignore_errors: true
-    - name: Stop service4
+    - name: start service4
       when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "")
       systemd:
         name: "{{service4}}"
-        state: stopped
+        state: started
       ignore_errors: true      
