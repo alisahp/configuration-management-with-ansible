@@ -8,7 +8,7 @@
         state: present
         vpc_id: "{{ vpc_id }}"
         region: us-east-2
-        cidr: 10.0.1.16/28
+        cidr: 10.10.1.0/16
         resource_tags:
           Name: Database Subnet
           register: database_subnet
