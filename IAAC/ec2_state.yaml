@@ -1,5 +1,5 @@
 ---
-- name: Playbook for terminating
+- name: Playbook for state, starting stopping
   hosts: localhost 
   connection: local
   gather_facts: false
