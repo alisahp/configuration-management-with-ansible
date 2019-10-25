@@ -5,7 +5,7 @@
   become_method: sudo
   tasks: 
     - ec2:
-        key_name: alikey2
+        key_name:"{{key_name}}"
         instance_type: "{{instance_type}}"
         image: ami-033e6106180a626d0
         count: "{{count}}"
