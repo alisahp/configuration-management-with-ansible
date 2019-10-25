@@ -7,7 +7,7 @@
     - ec2:
         key_name: ansiblekey
         instance_type: "{{instance_type}}"
-        image: ami-0eab3a90fc693af19
+        image: ami-033e6106180a626d0
         count: "{{count}}"
         vpc_subnet_id: "{{vpc_subnet_id}}"
         assign_public_ip: yes
