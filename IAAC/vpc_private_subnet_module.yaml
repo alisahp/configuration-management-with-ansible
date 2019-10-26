@@ -6,9 +6,27 @@
   tasks:
     - ec2_vpc_subnet:
         state: present
-        vpc_id: "{{ vpc_id }}"
+        vpc_id: vpc-03ec1a8a8b1fb973c
         region: us-east-2
         cidr: 10.10.1.0/16
         resource_tags:
-          Name: Database Subnet
-          register: database_subnet
+          Name: Database Subnet1
+          register: database_subnet2
+
+    - ec2_vpc_subnet:
+        state: present
+        vpc_id: vpc-03ec1a8a8b1fb973c
+        region: us-east-2
+        cidr: 10.10.2.0/16
+        resource_tags:
+          Name: Database Subnet2
+          register: database_subnet2 
+
+    - ec2_vpc_subnet:
+        state: present
+        vpc_id: vpc-03ec1a8a8b1fb973c
+        region: us-east-2
+        cidr: 10.10.3.0/16
+        resource_tags:
+          Name: Database Subnet3
+          register: database_subnet3
