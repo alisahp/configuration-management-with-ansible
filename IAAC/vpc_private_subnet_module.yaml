@@ -6,7 +6,7 @@
   tasks:
     - ec2_vpc_subnet:
         state: present
-        vpc_id: vpc-03ec1a8a8b1fb973c
+        vpc_id: vpc-03708f590e1c34b53
         region: us-east-1
         cidr: 10.10.1.0/16
         resource_tags:
