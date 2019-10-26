@@ -13,6 +13,11 @@
           Name: Database Subnet1
           register: database_subnet2
 
+- name: Playbook for create private subnet for database servers
+  hosts: localhost 
+  become: yes
+  become_method: sudo
+  tasks:
     - ec2_vpc_subnet:
         state: present
         vpc_id: vpc-03ec1a8a8b1fb973c
@@ -22,6 +27,12 @@
           Name: Database Subnet2
           register: database_subnet2 
 
+
+- name: Playbook for create private subnet for database servers
+  hosts: localhost 
+  become: yes
+  become_method: sudo
+  tasks:
     - ec2_vpc_subnet:
         state: present
         vpc_id: vpc-03ec1a8a8b1fb973c
