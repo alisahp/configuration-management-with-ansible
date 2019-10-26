@@ -1,14 +1,19 @@
-- name: example using security group rule descriptions
-  ec2_group:
-    name: "{{ name }}"
-    description: sg with rule descriptions
-    vpc_id: "{{ vpc_id }}"
-    profile: "{{ aws_profile }}"
-    region: us-east-1
-    rules:
-      - proto: tcp
-        ports:
-        - 80
-        - 22
-        cidr_ip: 0.0.0.0/0
-        rule_desc: allow all on port 80
+---
+- name: Playbook for vpc provision module
+  hosts: localhost 
+  become: yes
+  become_method: sudo
+  tasks:
+    ec2_group:
+      name: "{{ name }}"
+      description: sg with rule descriptions
+      vpc_id: "{{ vpc_id }}"
+      profile: "{{ aws_profile }}"
+      region: us-east-1
+      rules:
+        - proto: tcp
+          ports:
+          - 80
+          - 22
+          cidr_ip: 0.0.0.0/0
+          rule_desc: allow all on port 80
