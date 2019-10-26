@@ -1,0 +1,7 @@
+---
+- name: Playbook for tasks
+  hosts: all 
+  become: yes
+  become_method: sudo
+  roles:
+    - package

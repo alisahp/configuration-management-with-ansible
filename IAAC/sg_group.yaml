@@ -1,5 +1,5 @@
 ---
-- name: Playbook for vpc provision module
+- name: Playbook for sg group creation
   hosts: localhost 
   become: yes
   become_method: sudo
