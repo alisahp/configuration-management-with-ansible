@@ -1,0 +1,13 @@
+---
+# tasks file for package
+- name: Install company packages
+  user:
+    name: "{{item}}"
+  with_items:
+    - bob
+    - ben
+    - lisa
+    - kathy
+    - tim
+
+    
