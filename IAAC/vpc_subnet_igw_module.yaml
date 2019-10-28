@@ -1,0 +1,137 @@
+---
+- name: Playbook for Provisioning
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  become: false
+  tasks:
+# ---------------VPC START----------------------  
+
+    - name: create vpc in region
+      ec2_vpc_net:
+        name: new-vpc
+        cidr_block: 10.10.0.0/16
+        region: eu-central-1
+        tags:
+          name: new-vpc
+          task: vpc
+        tenancy: default  
+
+#--------------VPC GATHER FACTS------------------     
+    - name: gather facts to get vpc_id of "{{new-vpc}}"
+      ec2_vpc_net_facts:
+        region: eu-central-1
+        filters: 
+          "tag:Name": new-vpc
+      register: vpc_info
+      
+
+    - name: Display VPC facts(information)
+      debug:
+        var: vpc_info.vpcs[0].vpc_id
+
+
+#Private Subnet ------------------------------------
+    - name: Create subnet for database servers
+      ec2_vpc_subnet:
+        state: present
+        region: eu-central-1
+        az: eu-central-1a
+        vpc_id:  "{{vpc_info.vpcs[0].vpc_id}}"
+        cidr: 10.10.1.0/24
+        resource_tags:
+          Name: Private Subnet
+      register: private_subnet1
+
+    - name: Create subnet for database servers
+      ec2_vpc_subnet:
+        state: present
+        region: eu-central-1
+        az: eu-central-1b
+        vpc_id:  "{{vpc_info.vpcs[0].vpc_id}}"
+        cidr: 10.10.2.0/24
+        resource_tags:
+          Name: Private Subnet
+      register: private_subnet2 
+
+    - name: Create subnet for database servers
+      ec2_vpc_subnet:
+        state: present
+        region: eu-central-1
+        az: eu-central-1c
+        vpc_id:  "{{vpc_info.vpcs[0].vpc_id}}"
+        cidr: 10.10.1.0/24S
+        resource_tags:
+          Name: Private Subnet
+      register: private_subnet3 
+
+    - name: new_vpc
+      debug: 
+        var: vpc_info.vpcs[0].vpc_id
+  
+#Public Subnet ----------------------------------------
+    - name: Create subnet for  web servers
+      ec2_vpc_subnet:
+        state: present
+        region: eu-central-1
+        az: eu-central-1a
+        vpc_id:  "{{vpc_info.vpcs[0].vpc_id}}"
+        cidr: 10.10.101.0/24
+        resource_tags:
+          Name: Public Subnet
+      register: public_subnet1 
+    - name: Create subnet for web servers
+      ec2_vpc_subnet:
+        state: present
+        region: eu-central-1
+        az: eu-central-1b
+        vpc_id:  "{{vpc_info.vpcs[0].vpc_id}}"
+        cidr: 10.10.102.0/24
+        resource_tags:
+          Name: Public Subnet
+      register: public_subnet2  
+    
+    - name: Create subnet for web servers
+      ec2_vpc_subnet:
+        state: present
+        region: eu-central-1
+        az: eu-central-1c
+        vpc_id:  "{{vpc_info.vpcs[0].vpc_id}}"
+        cidr: 10.10.103.0/24
+        resource_tags:
+          Name: Public Subnet
+      register: public_subnet3  
+    - name: example using security group rule descriptions
+      ec2_group:
+        name: ssh and httpd open
+        description: sg with rule descriptions
+        vpc_id: "{{vpc_info.vpcs[0].vpc_id}}"
+        region: eu-central-1
+        rules:
+          - proto: tcp
+            ports:
+              - 80
+              - 22
+            cidr_ip: 0.0.0.0/0
+            rule_desc: allow all on port 80
+      register: sec_group_id
+    
+    - name: 
+  debug: 
+    var: 
+      - "{{vpc_info_info.vpcs[0].vpc_id}}"
+      - "{{public_subnet1}}"
+      - "{{public_subnet2}}"
+      - "{{public_subnet3}}"
+      - "{{private_subnet1}}"
+      - "{{private_subnet2}}"
+      - "{{private_subnet3}}"
+      - "{{sec_group_id}}"
+
+# internet gateway
+
+- name: 
+      ec2_vpc_igw:
+        vpc_id:  "{{vpc_info_info.vpcs[0].vpc_id}}"
+        state: present
+      register: igw
