@@ -6,8 +6,8 @@
       ec2_group:
         name: SecGroup
         description: Sec Group 1
-        vpc_id: vpc-48fe1723
-        region: us-east-1
+        vpc_id: vpc-a76919cf
+        region: ca-central-1
         rules:
          - proto: tcp
            ports:
