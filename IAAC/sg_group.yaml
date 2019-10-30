@@ -10,8 +10,8 @@
         region: us-east-1
         rules:
           - proto: tcp
-          ports:
-           - 80
-           - 22
+            ports:
+             - 80
+             - 22
           cidr_ip: 0.0.0.0/0
           
