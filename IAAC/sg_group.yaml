@@ -1,13 +1,11 @@
 ---
-- name: Playbook for sg group creation
+- name: Playbook for security groups
   hosts: localhost 
-  become: yes
-  become_method: sudo
   tasks:
     ec2_group:
-      name: "{{ name }}"
-      description: sg with rule descriptions
-      vpc_id: "{{ vpc_id }}"
+      name: SecGroup
+      description: Sec Group 1
+      vpc_id: vpc-48fe1723
       profile: "{{ aws_profile }}"
       region: us-east-1
       rules:
@@ -16,4 +14,4 @@
           - 80
           - 22
           cidr_ip: 0.0.0.0/0
-          rule_desc: allow all on port 80
+          
