@@ -2,15 +2,16 @@
 - name: Playbook for sec groups
   hosts: localhost 
   tasks:
-    ec2_group:
-      name: SecGroup
-      description: Sec Group 1
-      vpc_id: vpc-48fe1723
-      region: us-east-1
-      rules:
-        - proto: tcp
+    - name: Sec 
+      ec2_group:
+        name: SecGroup
+        description: Sec Group 1
+        vpc_id: vpc-48fe1723
+        region: us-east-1
+        rules:
+          - proto: tcp
           ports:
-          - 80
-          - 22
+           - 80
+           - 22
           cidr_ip: 0.0.0.0/0
           
