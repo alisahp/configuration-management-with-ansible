@@ -1,12 +1,11 @@
 ---
-- name: Playbook for security groups
+- name: Playbook for sec groups
   hosts: localhost 
   tasks:
     ec2_group:
       name: SecGroup
       description: Sec Group 1
       vpc_id: vpc-48fe1723
-      profile: "{{ aws_profile }}"
       region: us-east-1
       rules:
         - proto: tcp
