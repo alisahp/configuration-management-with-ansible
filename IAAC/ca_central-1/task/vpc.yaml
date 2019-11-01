@@ -1,12 +1,16 @@
 ---
 - name: Playbook for VPC
   hosts: localhost
+  gather_facts: no
+  vars_files:
+    - configurations/ca-central-1
+
   tasks:
     - name: VPC for class
       ec2_vpc_net:
         name: TaskVPC
         cidr_block: 10.0.0.0/16
-        region: ca-central-1
+        region: "{{region}}"
         tags:
           Class: Ansible
           Task: VPC
