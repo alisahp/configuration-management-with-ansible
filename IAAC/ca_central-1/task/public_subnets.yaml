@@ -18,7 +18,7 @@
         region: ca-central-1
         cidr: 10.0.101.0/24
         resource_tags:
-          Name: Web Subnet1
+          Name: Web subnet1
       register: Web_subnet1
 
     - name: Create Public Subnet 2
@@ -28,7 +28,7 @@
         region: ca-central-1
         cidr: 10.0.102.0/24
         resource_tags:
-          Name: Web Subnet2
+          Name: Web subnet2
       register: Web_subnet2
 
     - name: Create Public Subnet 3
@@ -38,5 +38,7 @@
         region: ca-central-1
         cidr: 10.0.103.0/24
         resource_tags:
-          Name: Web Subnet3
+          Name: Web subnet3
       register: Web_subnet3
+
+  
